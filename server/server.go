@@ -36,6 +36,7 @@ func (s *Server) routes() http.Handler {
 	r.HandleFunc("/key", s.GetKey()).Methods("GET")
 	r.HandleFunc("/key", s.SetKey()).Methods("POST")
 	r.HandleFunc("/join", s.JoinNode()).Methods("GET")
+	r.HandleFunc("/stats", s.Stats()).Methods("GET")
 
 	return r
 }

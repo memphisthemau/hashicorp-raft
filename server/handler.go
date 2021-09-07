@@ -107,3 +107,13 @@ func (s *Server) JoinNode() http.HandlerFunc {
 		rw.WriteHeader(http.StatusOK)
 	}
 }
+
+func (s *Server) Stats() http.HandlerFunc {
+	return func(rw http.ResponseWriter, r *http.Request) {
+		if err := json.NewEncoder(rw).Encode(s.raft.Stats()); err != nil {
+			log.Println("failed to retrieve stats", err)
+			rw.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+	}
+}
